@@ -25,11 +25,11 @@ export const UserStorage = ({ children }: any) => {
     const handleLogin = (email: string, password: string) => {
         api.post('/user/sign-in', {email,password}).then(({ data }) => {
             setLogin(true);
-            localStorage.setItem('token', data.token)
-            setToken(data.token)
+            localStorage.setItem('token', data.token);
+            setToken(data.token);
             getUser(data.token);
         }).catch((error) => {
-            console.log('Não foi possível fazer o login', error)
+            console.log('Não foi possível fazer o login', error);
         })
     }
 
