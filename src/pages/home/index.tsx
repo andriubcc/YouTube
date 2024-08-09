@@ -6,31 +6,56 @@ interface IProps {
     openMenu: boolean;
 }
 
+const videos = [
+    { 
+        image: '',
+        title: 'Kayblack - Bonjour (VIDEO CLIPE OFICIAL)',
+        channel: 'Real Kayblack',
+        views: '30 mi',
+        time: 'há 1 ano'
+    },
+
+    { 
+        image: '',
+        title: 'Kayblack - Bonjour (VIDEO CLIPE OFICIAL)',
+        channel: 'Real Kayblack',
+        views: '30 mi',
+        time: 'há 1 ano'
+    },
+    
+    { 
+        image: '',
+        title: 'Kayblack - Bonjour (VIDEO CLIPE OFICIAL)',
+        channel: 'Real Kayblack',
+        views: '30 mi',
+        time: 'há 1 ano'
+    },
+
+    { 
+        image: '',
+        title: 'Kayblack - Bonjour (VIDEO CLIPE OFICIAL)',
+        channel: 'Real Kayblack',
+        views: '30 mi',
+        time: 'há 1 ano'
+    },
+
+    { 
+        image: '',
+        title: 'Kayblack - Bonjour (VIDEO CLIPE OFICIAL)',
+        channel: 'Real Kayblack',
+        views: '30 mi',
+        time: 'há 1 ano'
+    }
+]
+
 function Home({openMenu}: IProps) {
     return (
      <div>
         <Categories/>    
         <Container openMenu={openMenu}>
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
-        <VideoComponent />
+            {videos.map((video) => (
+                <VideoComponent video={video} />
+            ))}
         </Container>
      </div>
     )

@@ -35,4 +35,11 @@ function App() {
   );
 }
 
+
+// Deixar a tela de login no padrão (deixar bonita) - a fazer
+// Implementar um dropdown menu no botao de login - feito, mas nao estilizei
+// Criar a tela e a integraçao para cadastro de usuario
+// Criar a tela e a integraçao para cadastro de video
+// Implementaçao de pesquisa
+
 export default App;

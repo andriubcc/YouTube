@@ -16,9 +16,10 @@ import SearchIcon from '../../assets/SearchIcon.png';
 import MicIcon from '../../assets/Microfone.png';
 import VideoIcon from '../../assets/video.png';
 import NotificationIcon from '../../assets/sino.png';
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/userContext";
+import Dropdown from "../dropdown";
 
 interface IProps {
     openMenu: boolean,
@@ -26,8 +27,33 @@ interface IProps {
 }
 
 function Header({ openMenu, setOpenMenu }: IProps ) {
-    const { login } = useContext(UserContext);
+    const { login, user } = useContext(UserContext);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
+
+    const toggleDropdown = () => {
+        setDropdownOpen(prevState => !prevState);
+    };
     
+        const handleClickOutside = (event: any) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false); 
+            }
+        };
+        
+        useEffect(() => {
+            setDropdownOpen(false);
+        },[location.pathname])
+    
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return() => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, []);
+
     const navigate = useNavigate();
 
     return (
@@ -48,7 +74,7 @@ function Header({ openMenu, setOpenMenu }: IProps ) {
                 <ButtonContainer margin='0 0 0 10px'>
                     <ButtonIcon alt="" src={MicIcon}  />
                 </ButtonContainer>
-            </SearchContainer>
+            </SearchContainer> 
 
             <HeaderButton>
                 <ButtonContainer margin='0 0 0 10px'>
@@ -59,9 +85,14 @@ function Header({ openMenu, setOpenMenu }: IProps ) {
                 </ButtonContainer>
                 
                 {login? 
-                <ButtonContainer margin='0 0 0 10px'>
-                    P
-                </ButtonContainer>
+                <>
+                    <ButtonContainer onClick={toggleDropdown} margin='0 0 0 10px'>
+                        {user.nome && user.nome[0] && user.nome[0].toUpperCase()}
+                    </ButtonContainer>
+                    {dropdownOpen && (
+                        <div ref={dropdownRef}><Dropdown/></div>
+                    )}
+                </>
                 
                 :
 
