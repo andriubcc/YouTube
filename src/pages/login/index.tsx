@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import { Container, LoginContainer } from "./styles";
 
 
 function Login(){
@@ -18,15 +19,21 @@ function Login(){
     }
 
     return (
-        <>
-        <div>login</div>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-        <button onClick={() => {
-            closeDropdown();
-            handleLogin(email, password)}
-        }>Login</button>
-        </>
+        <Container>
+            <LoginContainer>
+                <span>Fazer Login</span>
+                <div className="login">
+                    <span>Email</span>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className="login">
+                    <span>Senha</span>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <button onClick={() => {closeDropdown();handleLogin(email, password)}}>Login</button>
+            </LoginContainer>
+        </Container>
+        
     )
 }
 

@@ -96,7 +96,7 @@ function Header({ openMenu, setOpenMenu }: IProps ) {
                 
                 :
 
-                <button onClick={() => navigate('/login')}>Fazer Login</button>
+                <button onClick={() => navigate('/signup')}>Fazer Login</button>
                 }
             </HeaderButton>
         </Container>

@@ -7,6 +7,8 @@ import Library from "./pages/library";
 import History from "./pages/history";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import SignUp from "./pages/signup";
+import Upload from "./pages/upload";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
             <Route path="/" element={<Home openMenu={openMenu} />} />
             <Route path="/library" element={<Library />} />
             <Route path="/history" element={<History />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/upload" element={<Upload />} />
           </Routes>
       </div>
      </div>
@@ -36,10 +40,10 @@ function App() {
 }
 
 
-// Deixar a tela de login no padrão (deixar bonita) - a fazer
+// Deixar a tela de login no padrão (deixar bonita) - da pra melhorar mas ja ta bom
 // Implementar um dropdown menu no botao de login - feito, mas nao estilizei
-// Criar a tela e a integraçao para cadastro de usuario
-// Criar a tela e a integraçao para cadastro de video
+// Criar a tela e a integraçao para cadastro de usuario - feito
+// Criar a tela e a integraçao para cadastro de video; numero de visualizacoes; a quanto tempo esse video foi criado(data de quando ele foi criado = calculo de quanto tempo)
 // Implementaçao de pesquisa
 
 export default App;

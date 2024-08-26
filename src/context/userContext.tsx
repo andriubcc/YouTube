@@ -4,9 +4,15 @@ import api from '../api';
 export const UserContext = createContext({} as any);
 
 export const UserStorage = ({ children }: any) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const [login, setLogin] = useState(false);
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
+    
+    
 
 
     const getUser = (token: string) => {
@@ -28,6 +34,19 @@ export const UserStorage = ({ children }: any) => {
         setUser({});
     }
 
+    const handleSubmit = (name: string, email: string, password: string, navigate: any) => {
+        api.post('/user/sign-up', {name,email,password}).then(({ data }) => {
+            setName('');
+            setEmail('');
+            setPassword('');
+            navigate('/login');
+            alert('Cadastro realizado com sucesso');
+         }).catch((error) => {
+            console.log('Não foi possivel fazer o cadastro', error);
+             alert('Não foi possivel fazer o cadastro');
+         });
+    }
+
     const handleLogin = (email: string, password: string) => {
         api.post('/user/sign-in', {email,password}).then(({ data }) => {
             setLogin(true);
@@ -36,11 +55,11 @@ export const UserStorage = ({ children }: any) => {
             getUser(data.token);
         }).catch((error) => {
             console.log('Não foi possível fazer o login', error);
-        })
+        });
     }
 
     return (
-        <UserContext.Provider value={{ login, user, handleLogin, logOut }}>
+        <UserContext.Provider value={{ login, user, handleLogin, handleSubmit, logOut }}>
             {children}
         </UserContext.Provider>
     )
