@@ -1,4 +1,4 @@
-import { Container, ImageBanner, TextContainer,
+import { Container, ImageVideo, TextContainer,
      TitleContainer, ChannelImage, Title, TextCard } from "./styles";
 
 import Bonjour from "../../assets/bonjour.png"
@@ -7,7 +7,7 @@ import Kay from "../../assets/kay.png"
 function VideoComponent({ video }: any) {
     return (
         <Container>
-          <ImageBanner src={Bonjour}/>
+          <ImageVideo src={Bonjour}/>
           <TitleContainer>
             <ChannelImage src={Kay}/>
             <TextContainer>

@@ -31,6 +31,7 @@ function Login(){
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <button onClick={() => {closeDropdown();handleLogin(email, password)}}>Login</button>
+                <span>amanda@amanda.com</span>
             </LoginContainer>
         </Container>
         

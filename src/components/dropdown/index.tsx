@@ -11,9 +11,8 @@ function Dropdown () {
     const navigate = useNavigate();
     
     const buttons = [
-        {label: 'Conta do Google'},
         {label: 'Fazer Upload de vídeo', onClick: () => {navigate('/upload')}},
-        {label: 'Configurações'},
+        {label: 'Meus Vídeos', onClick: () => {navigate('/myvideos')}},
         {label: 'Sair da Conta', onClick: () => {console.log('Logout function called'); logOut()}}
     ]
     

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-   width: 300px;
+   width: 100%;
 `;
 
-export const ImageVideo = styled.img`
+export const ImageBanner = styled.img`
     width: 100%;
     height: 210px;
     border-radius: 12px;
@@ -15,7 +15,7 @@ export const TitleContainer = styled.div`
    display: flex;
 `;
 
-export const ChannelImage = styled.img`
+export const ChannelImage = styled.div`
     background-color: beige;
     width: 40px;
     height: 40px;

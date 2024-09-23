@@ -6,7 +6,7 @@ interface IProps {
 
 
 
-export const UserContext = createContext({});
+export const UserContext = createContext({} as any);
 
 export const UserStore:React.FC<IProps> = ({ children }) => {
     const [openMenu, setOpenMenu] = useState(true)

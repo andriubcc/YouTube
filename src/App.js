@@ -9,6 +9,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Upload from "./pages/upload";
+import MyVideos from "./pages/myvideos";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/myvideos" element={<MyVideos />}/>
           </Routes>
       </div>
      </div>
