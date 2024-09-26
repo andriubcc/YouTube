@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
    width: 100%;
+
+   #novideos {
+    padding: 0 0 0 400px;
+    color: gray;
+    width: 1000px;
+    height: 300px;
+    font-size: 50px;
+   }
 `;
 
 export const ImageBanner = styled.img`

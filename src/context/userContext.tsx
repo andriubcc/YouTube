@@ -8,9 +8,9 @@ export const UserStorage = ({ children }: any) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
     const [user_id, setUser_id] = useState(localStorage.getItem('user_id') as string);
-    const [title, setTitle] = useState({});
-    const [currentDate, setCurrentDate] = useState({});
-    const [URL, setURL] = useState({});
+    const [title, setTitle] = useState('');
+    const [currentDate, setCurrentDate] = useState('');
+    const [URL, setURL] = useState('');
 
     const formatDateForSQL = (date: Date) => {
         const year = date.getFullYear();
@@ -23,6 +23,12 @@ export const UserStorage = ({ children }: any) => {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
       };
     
+    // login fica bom com ("")
+
+
+
+
+
 
     
     const getUser = useCallback((token: string) => {
@@ -52,10 +58,8 @@ export const UserStorage = ({ children }: any) => {
     
     
     useEffect(() => {
-        // if (token && videoData) {
             getUser(token);
             getVideos();
-        // }
         // eslint-disable-next-line
     },[token, getUser, user_id, getVideos]);
     
@@ -64,10 +68,10 @@ export const UserStorage = ({ children }: any) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user_id')
         setLogin(false);
-        setUser({});
-        setTitle({});
-        setCurrentDate({});
-        setURL({});
+        setUser('');
+        setTitle('');
+        setCurrentDate('');
+        setURL('');
     }
     
     const handleSubmit = (name: string, email: string, password: string, navigate: any) => {
@@ -82,12 +86,17 @@ export const UserStorage = ({ children }: any) => {
     
     
     const handleLogin = (email: string, password: string, title: string) => {
+        const reload = () => {
+            window.location.reload()
+        }
+
         api.post('/user/sign-in', {email,password}).then(({ data }) => {
             setLogin(true);
             localStorage.setItem('token', data.token);
             setToken(data.token);  
             getUser(data.token);
             getVideos();
+            reload();
         }).catch((error) => {
             console.log('Não foi possível fazer o login', error);
         });
@@ -100,9 +109,9 @@ export const UserStorage = ({ children }: any) => {
         console.log({user_id, title, description, video_date: currentDate, URL});
 
          api.post('videos/create-video', {user_id, title, description, video_date: currentDate, URL}, {headers: {Authorization: token}}).then(() => {
-            setTitle(title)
-            setCurrentDate(currentDate)
-            setURL(URL)
+            setTitle(title as string)
+            setCurrentDate(currentDate as string)
+            setURL(URL as string)
         }).catch((error) => {
             console.log('Nao possivel fazer o Upload', error);
         })
@@ -110,7 +119,7 @@ export const UserStorage = ({ children }: any) => {
 
 
     return (
-        <UserContext.Provider value={{ login, user, title, currentDate, URL, handleLogin, handleSubmit, logOut, handleUpload, formatDateForSQL}}>
+        <UserContext.Provider value={{ login, user, title, currentDate, URL, handleLogin, handleSubmit, logOut, handleUpload}}>
             {children}
         </UserContext.Provider>
     )

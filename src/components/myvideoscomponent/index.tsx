@@ -12,14 +12,12 @@ import { useContext } from "react";
 
 
 function MyVideoComponent() {
-  const { user, title, currentDate, URL, formatDateForSQL } = useContext(UserContext);
+  const { user, title, currentDate, URL } = useContext(UserContext);
 
   function getTimeDifferenceMessage() {
     const created = new Date(currentDate) as any;
     const Now = new Date() as any;
     const diffInMilliSeconds = Now - created;
-
-    console.log('diferença', diffInMilliSeconds)
     
     const diffInSeconds = Math.floor(diffInMilliSeconds / 1000);
     const minutes = Math.floor(diffInSeconds / 60);
@@ -41,14 +39,16 @@ function MyVideoComponent() {
     }
   }
   
-  console.log('Data criada:', currentDate)
-  console.log('Data atual:', formatDateForSQL(new Date()))
-  
   const timeDifferenceMessage = getTimeDifferenceMessage();
-  
-  console.log(timeDifferenceMessage)
-  
-  
+    
+  if (!URL || !title! || !currentDate) {
+    return (
+      <Container>
+        <div id="novideos" >Este usuário não tem videos</div>
+      </Container>
+    );
+  }
+
   return (
     <Container>
          <ImageBanner  src={URL}/>
@@ -60,17 +60,8 @@ function MyVideoComponent() {
                <TextCard></TextCard>
            </TextContainer>
          </TitleContainer>
-       </Container>
+    </Container>
    )
   }
 
   export default MyVideoComponent;
-  
-  // Verificar se createdDate é uma string ou Date e converter se necessário
-  // const created = typeof createdDate === 'string' ? new Date(createdDate) : createdDate;
-
-  // Verificar se created é uma instância válida de Date
-  // if (!(created instanceof Date) || isNaN(created.getTime())) {
-  //   console.error("Data de criação inválida passada para getTimeDifferenceMessage", createdDate);
-  //   return "Data inválida";
-  // }
