@@ -32,19 +32,19 @@ export const UserStorage = ({ children }: any) => {
 
     
     const getUser = useCallback((token: string) => {
-        api.get('/user/get-user', {headers:{Authorization: token}}).then(({ data }) => {
-            setUser(data.user);
-            setLogin(true);
-            localStorage.setItem('user_id', data.user.id);
-            setUser_id(user_id);
+        api.get('/user/get-user', {headers:{Authorization: token}, }).then(({ data }) => {
+                setUser(data.user);
+                setLogin(true);
+                localStorage.setItem('user_id', data.user.id);
+                setUser_id(data.user.id);
         }).catch((error) => {
             console.log('Usuário não autenticado', error)
         })
-    }, [user_id]);
+    }, []);
     
     
     
-    const getVideos = useCallback(() => {
+    const getVideos = useCallback((userId: string) => {
         api.get(`/videos/get-videos/${user_id}`).then((response) => {
             setTitle(response.data.videos[0].title);
             setCurrentDate(response.data.videos[0].video_date);
@@ -57,11 +57,23 @@ export const UserStorage = ({ children }: any) => {
     }, [user_id]);
     
     
+    // useEffect(() => {
+    //         getUser(token, user_id);
+    //         getVideos();
+    //     // eslint-disable-next-line
+    // },[token, getUser, user_id, getVideos]);
+
     useEffect(() => {
+        if (token) {
             getUser(token);
-            getVideos();
-        // eslint-disable-next-line
-    },[token, getUser, user_id, getVideos]);
+        }
+    }, [token, getUser]);
+    
+    useEffect(() => {
+        if (user_id) {
+            getVideos(user_id);
+        }
+    }, [user_id, getVideos]);
     
     
     const logOut = () => {
@@ -72,6 +84,8 @@ export const UserStorage = ({ children }: any) => {
         setTitle('');
         setCurrentDate('');
         setURL('');
+        setToken('');
+        setUser_id('');
     }
     
     const handleSubmit = (name: string, email: string, password: string, navigate: any) => {
@@ -86,17 +100,11 @@ export const UserStorage = ({ children }: any) => {
     
     
     const handleLogin = (email: string, password: string, title: string) => {
-        const reload = () => {
-            window.location.reload()
-        }
-
         api.post('/user/sign-in', {email,password}).then(({ data }) => {
             setLogin(true);
             localStorage.setItem('token', data.token);
             setToken(data.token);  
             getUser(data.token);
-            getVideos();
-            reload();
         }).catch((error) => {
             console.log('Não foi possível fazer o login', error);
         });
