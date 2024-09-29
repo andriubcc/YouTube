@@ -1,23 +1,21 @@
-import { Container, ImageBanner, TextContainer,
-    TitleContainer, ChannelImage, Title, TextCard } from "./styles";
+import { Container, ImageBanner, TextContainer,TitleContainer, ChannelImage, Title, TextCard } from "./styles";
 import { UserContext } from "../../context/userContext";
 import { useContext } from "react";
 
-//  interface IProps {
-//   URL: string,
-//   title: string,
-//   video_date: string,
-
-//  }
+interface IProps {
+  openMenu: boolean
+}
 
 
-function MyVideoComponent() {
-  const { user, title, currentDate, URL } = useContext(UserContext);
-
-  function getTimeDifferenceMessage() {
-    const created = new Date(currentDate) as any;
+function MyVideoComponent({openMenu}: IProps ) {
+  const { user, videos } = useContext(UserContext);
+  
+  
+  function getTimeDifferenceMessage(video_date: string) {
+    const created = new Date(video_date) as any;
     const Now = new Date() as any;
     const diffInMilliSeconds = Now - created;
+    
     
     const diffInSeconds = Math.floor(diffInMilliSeconds / 1000);
     const minutes = Math.floor(diffInSeconds / 60);
@@ -39,29 +37,34 @@ function MyVideoComponent() {
     }
   }
   
-  const timeDifferenceMessage = getTimeDifferenceMessage();
-    
-  if (!URL || !title! || !currentDate) {
+  
+  if (!videos || videos.length === 0) {
     return (
-      <Container>
+      <Container  openMenu={openMenu}>
         <div id="novideos" >Este usuário não tem videos</div>
       </Container>
     );
   }
-
+  
+  
   return (
-    <Container>
-         <ImageBanner  src={URL}/>
+    <Container openMenu={openMenu}>
+    {videos.map(( video: any, index: number) => (
+      <div key={index}>
+         <ImageBanner  src={video.URL}/>
          <TitleContainer >
            <ChannelImage>{user.nome && user.nome[0] && user.nome[0].toUpperCase()}</ChannelImage>
            <TextContainer>
-               <Title>{title}</Title>
-               <TextCard>{timeDifferenceMessage}</TextCard>
+               <Title>{video.title}</Title>
+               <TextCard>{getTimeDifferenceMessage(video.video_date)}</TextCard>
                <TextCard></TextCard>
            </TextContainer>
          </TitleContainer>
+      </div>
+    ))}
     </Container>
    )
   }
-
+  
+  
   export default MyVideoComponent;

@@ -8,9 +8,10 @@ export const UserStorage = ({ children }: any) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
     const [user_id, setUser_id] = useState(localStorage.getItem('user_id') as string);
-    const [title, setTitle] = useState('');
-    const [currentDate, setCurrentDate] = useState('');
-    const [URL, setURL] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [currentDate, setCurrentDate] = useState([]);
+    // const [URL, setURL] = useState('');
+    const [ videos, setVideos] = useState<any>([]);
 
     const formatDateForSQL = (date: Date) => {
         const year = date.getFullYear();
@@ -23,13 +24,6 @@ export const UserStorage = ({ children }: any) => {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
       };
     
-    // login fica bom com ("")
-
-
-
-
-
-
     
     const getUser = useCallback((token: string) => {
         api.get('/user/get-user', {headers:{Authorization: token}, }).then(({ data }) => {
@@ -43,12 +37,9 @@ export const UserStorage = ({ children }: any) => {
     }, []);
     
     
-    
     const getVideos = useCallback((userId: string) => {
         api.get(`/videos/get-videos/${user_id}`).then((response) => {
-            setTitle(response.data.videos[0].title);
-            setCurrentDate(response.data.videos[0].video_date);
-            setURL(response.data.videos[0].URL);
+            setVideos(response.data.videos)
             console.log('Vídeos retornados com sucesso', response.data.videos[0])
         }).catch((error) => {
             console.log('Erro ao buscar vídeos', error)
@@ -56,18 +47,13 @@ export const UserStorage = ({ children }: any) => {
         // eslint-disable-next-line
     }, [user_id]);
     
-    
-    // useEffect(() => {
-    //         getUser(token, user_id);
-    //         getVideos();
-    //     // eslint-disable-next-line
-    // },[token, getUser, user_id, getVideos]);
 
     useEffect(() => {
         if (token) {
             getUser(token);
         }
     }, [token, getUser]);
+
     
     useEffect(() => {
         if (user_id) {
@@ -81,13 +67,12 @@ export const UserStorage = ({ children }: any) => {
         localStorage.removeItem('user_id')
         setLogin(false);
         setUser('');
-        setTitle('');
-        setCurrentDate('');
-        setURL('');
+        setVideos([]);
         setToken('');
         setUser_id('');
     }
     
+
     const handleSubmit = (name: string, email: string, password: string, navigate: any) => {
         api.post('/user/sign-up', {name,email,password}).then(() => {
             navigate('/login');
@@ -110,24 +95,32 @@ export const UserStorage = ({ children }: any) => {
         });
     }
 
-    // {headers:{Authorization: token}
+    interface Video {
+        title: string;
+        video_date: string;
+        URL: string;
+    }
 
-    const handleUpload = (title: string, description: string, URL: string) => {
+
+    const handleUpload = (title: string, description: string, URL: string, setVideos: any) => {
         const currentDate = formatDateForSQL(new Date());
         console.log({user_id, title, description, video_date: currentDate, URL});
 
          api.post('videos/create-video', {user_id, title, description, video_date: currentDate, URL}, {headers: {Authorization: token}}).then(() => {
-            setTitle(title as string)
-            setCurrentDate(currentDate as string)
-            setURL(URL as string)
+            setVideos((prevVideos: Video[]) => [
+                ...prevVideos,
+                {title, video_date: currentDate, URL}
+            ])
         }).catch((error) => {
             console.log('Nao possivel fazer o Upload', error);
         })
     }
 
+    
+
 
     return (
-        <UserContext.Provider value={{ login, user, title, currentDate, URL, handleLogin, handleSubmit, logOut, handleUpload}}>
+        <UserContext.Provider value={{ login, user, videos, handleLogin, handleSubmit, logOut, handleUpload}}>
             {children}
         </UserContext.Provider>
     )

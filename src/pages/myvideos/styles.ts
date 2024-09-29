@@ -7,5 +7,5 @@ export const Container = styled.div`
 
 
 export const MyVideosContainer = styled.div`
-    width: 300px;
+    width: 100%;
 `;

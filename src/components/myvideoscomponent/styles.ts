@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{openMenu: boolean}>`
    width: 100%;
+   display: grid;
+   grid-template-columns: ${({openMenu}) => openMenu? 'repeat(4, 1fr)' : 'repeat(5, 1fr)'};
+   column-gap: 20px;
+   row-gap: 50px;
 
    #novideos {
     padding: 0 0 0 400px;
