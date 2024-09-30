@@ -10,6 +10,7 @@ import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Upload from "./pages/upload";
 import MyVideos from "./pages/myvideos";
+import Search from "./pages/search";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/myvideos" element={<MyVideos />}/>
+            <Route path="/search" element={<Search openMenu={openMenu} />}/> 
           </Routes>
       </div>
      </div>

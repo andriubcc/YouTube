@@ -8,7 +8,7 @@ export const UserStorage = ({ children }: any) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
     const [user_id, setUser_id] = useState(localStorage.getItem('user_id') as string);
-    // const [title, setTitle] = useState('');
+    const [title, setTitle] = useState('');
     // const [currentDate, setCurrentDate] = useState([]);
     // const [URL, setURL] = useState('');
     const [ videos, setVideos] = useState<any>([]);
@@ -44,8 +44,17 @@ export const UserStorage = ({ children }: any) => {
         }).catch((error) => {
             console.log('Erro ao buscar vídeos', error)
         })
-        // eslint-disable-next-line
     }, [user_id]);
+
+
+    const searchVideos = useCallback((title: string) => {
+        api.get(`/videos/search?search=${title}`).then((response) => {
+            setVideos(response.data.videos)
+            console.log('Pesquisa feita com sucesso', response.data.videos[0])
+        }).catch((error) => {
+            console.log("Erro ao procurar videos", error)
+        })
+    }, [])
     
 
     useEffect(() => {
@@ -60,6 +69,12 @@ export const UserStorage = ({ children }: any) => {
             getVideos(user_id);
         }
     }, [user_id, getVideos]);
+
+    useEffect(() => {
+        if(title) {
+            searchVideos(title);
+        }
+    }, [title, searchVideos]);
     
     
     const logOut = () => {
@@ -102,7 +117,7 @@ export const UserStorage = ({ children }: any) => {
     }
 
 
-    const handleUpload = (title: string, description: string, URL: string, setVideos: any) => {
+    const handleUpload = (title: string, description: string, URL: string) => {
         const currentDate = formatDateForSQL(new Date());
         console.log({user_id, title, description, video_date: currentDate, URL});
 
@@ -116,11 +131,10 @@ export const UserStorage = ({ children }: any) => {
         })
     }
 
-    
 
 
     return (
-        <UserContext.Provider value={{ login, user, videos, handleLogin, handleSubmit, logOut, handleUpload}}>
+        <UserContext.Provider value={{ login, user, videos, handleLogin, handleSubmit, logOut, handleUpload, searchVideos, getVideos}}>
             {children}
         </UserContext.Provider>
     )

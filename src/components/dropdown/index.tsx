@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 
 function Dropdown () {
-    const { logOut } = useContext(UserContext);
+    const { logOut, getVideos } = useContext(UserContext);
 
     const navigate = useNavigate();
     
     const buttons = [
         {label: 'Fazer Upload de vídeo', onClick: () => {navigate('/upload')}},
-        {label: 'Meus Vídeos', onClick: () => {navigate('/myvideos')}},
+        {label: 'Meus Vídeos', onClick: () => {navigate('/myvideos'); getVideos()}},
         {label: 'Sair da Conta', onClick: () => {console.log('Logout function called'); logOut()}}
     ]
     

@@ -27,8 +27,9 @@ interface IProps {
 }
 
 function Header({ openMenu, setOpenMenu }: IProps ) {
-    const { login, user } = useContext(UserContext);
+    const { login, user, searchVideos } = useContext(UserContext);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [ title, setTitle] = useState('');
     const dropdownRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
 
@@ -66,9 +67,9 @@ function Header({ openMenu, setOpenMenu }: IProps ) {
             </LogoContainer>
             <SearchContainer>
                 <SearchInputContainer>
-                  <SearchInput placeholder="Pesquisar" />
+                  <SearchInput placeholder="Pesquisar" type="text"  value={title} onChange={(e) => setTitle(e.target.value)}/>
                 </SearchInputContainer>
-                <SearchButton>
+                <SearchButton onClick={() => {searchVideos(title); navigate('/search')}}>
                     <ButtonIcon  alt="" src={SearchIcon} />
                 </SearchButton>
                 <ButtonContainer margin='0 0 0 10px'>
