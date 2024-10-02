@@ -8,10 +8,10 @@ export const UserStorage = ({ children }: any) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
     const [user_id, setUser_id] = useState(localStorage.getItem('user_id') as string);
+    // eslint-disable-next-line
     const [title, setTitle] = useState('');
-    // const [currentDate, setCurrentDate] = useState([]);
-    // const [URL, setURL] = useState('');
     const [ videos, setVideos] = useState<any>([]);
+    const [ searchedVideos, setSearchedVideos] = useState<any>([]);
 
     const formatDateForSQL = (date: Date) => {
         const year = date.getFullYear();
@@ -31,6 +31,7 @@ export const UserStorage = ({ children }: any) => {
                 setLogin(true);
                 localStorage.setItem('user_id', data.user.id);
                 setUser_id(data.user.id);
+                console.log(data.user);
         }).catch((error) => {
             console.log('Usuário não autenticado', error)
         })
@@ -48,9 +49,26 @@ export const UserStorage = ({ children }: any) => {
 
 
     const searchVideos = useCallback((title: string) => {
-        api.get(`/videos/search?search=${title}`).then((response) => {
-            setVideos(response.data.videos)
+        api.get(`/videos/search?search=${title}`).then( async(response) => {
+            const videos = response.data.videos 
+
+            const videoWithUserName = await Promise.all(videos.map(async(video: any) => {
+                try {
+                    const userResponse = await api.get(`/user/get-user/${video.user_id}`);
+                    return {
+                        ...video,
+                        userName: userResponse.data.user.nome
+                    };
+                }catch(error) {
+                    console.error('Erro ao buscar informações do usúario', error);
+                    return video;
+                }
+            }))
+
+
+            setSearchedVideos(videoWithUserName)
             console.log('Pesquisa feita com sucesso', response.data.videos[0])
+            console.log(videos)
         }).catch((error) => {
             console.log("Erro ao procurar videos", error)
         })
@@ -134,7 +152,7 @@ export const UserStorage = ({ children }: any) => {
 
 
     return (
-        <UserContext.Provider value={{ login, user, videos, handleLogin, handleSubmit, logOut, handleUpload, searchVideos, getVideos}}>
+        <UserContext.Provider value={{ login, user, videos, searchedVideos, handleLogin, handleSubmit, logOut, handleUpload, searchVideos, getVideos}}>
             {children}
         </UserContext.Provider>
     )

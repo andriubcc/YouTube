@@ -67,7 +67,14 @@ function Header({ openMenu, setOpenMenu }: IProps ) {
             </LogoContainer>
             <SearchContainer>
                 <SearchInputContainer>
-                  <SearchInput placeholder="Pesquisar" type="text"  value={title} onChange={(e) => setTitle(e.target.value)}/>
+                  <SearchInput placeholder="Pesquisar" type="text"  value={title} onChange={(e) => setTitle(e.target.value)}
+                   onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        searchVideos(title);
+                        navigate('/search')
+                    }
+                   }}/>
+
                 </SearchInputContainer>
                 <SearchButton onClick={() => {searchVideos(title); navigate('/search')}}>
                     <ButtonIcon  alt="" src={SearchIcon} />

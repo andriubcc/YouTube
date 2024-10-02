@@ -1,5 +1,5 @@
 import Categories from "../../components/categories";
-import MyVideoComponent from "../../components/myvideoscomponent";
+import SearchedVideoComponent from "../../components/searchvideocomponent";
 import { Container, MyVideosContainer } from "./styles";
 
 
@@ -13,7 +13,7 @@ function Search({openMenu}: IProps) {
         <Categories/>    
         <Container>
             <MyVideosContainer>
-                <MyVideoComponent openMenu={openMenu}/>
+                <SearchedVideoComponent openMenu={openMenu}/>
             </MyVideosContainer>
         </Container>
      </div>
