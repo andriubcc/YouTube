@@ -193,7 +193,7 @@ import Dropdown from "../dropdown";
                 )}
             </>
           :
-          <LoginContainer onClick={() => navigate('/login')}>
+          <LoginContainer onClick={() => navigate('/signup')}>
             <LoginButton>
               <LoginIcon alt="Login Icon" src={LoginIconPng} />
               <Span>Fazer login</Span>
