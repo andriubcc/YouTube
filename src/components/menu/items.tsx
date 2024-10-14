@@ -23,35 +23,35 @@ import FeedbackIcon from '../../assetsicon/feedback.png';
 
 export const items1 = [
     { name: 'Início', link: '/', icon: HomeIcon },
-    {name: 'Biblioteca', link: '/library', icon: LibraryIcon },
-    {name: 'Histórico', link: '/history', icon: HistoryIcon },
+    {name: 'Biblioteca', link: '/to-do', icon: LibraryIcon },
+    {name: 'Histórico', link: '/to-do', icon: HistoryIcon },
 ];
 
 
 export const items2 = [
-    {name: 'Seu canal', link: '/history', icon: SeuCanalIcon },
-    {name: 'PlayLists', link: '/history', icon: PlayListIcon },
-    {name: 'Seus Vídeos', link: '/history', icon: SeusVideosIcon },
-    {name: 'Assistir depois', link: '/history', icon: WatchLaterIcon },
-    {name: 'Downloads', link: '/history', icon: DownloadsIcon },
+    {name: 'Seu canal', link: '/to-do', icon: SeuCanalIcon },
+    {name: 'PlayLists', link: '/to-do', icon: PlayListIcon },
+    {name: 'Seus Vídeos', link: '/to-do', icon: SeusVideosIcon },
+    {name: 'Assistir depois', link: '/to-do', icon: WatchLaterIcon },
+    {name: 'Downloads', link: '/to-do', icon: DownloadsIcon },
     ];
 
 export const items3 = [
-    {name: 'Em alta', link: '/history', icon: EmAltaIcon },
-    {name: 'Shopping', link: '/history', icon: ShoppingIcon },
-    {name: 'Música', link: '/history', icon: MusicIcon },
-    {name: 'Filmes', link: '/history', icon: MoviesIcon },
-    {name: 'Ao vivo', link: '/history', icon: LiveIcon },
-    {name: 'Jogos', link: '/history', icon: GamesIcon },
-    {name: 'Notícias', link: '/history', icon: NewsIcon },
-    {name: 'Esportes', link: '/history', icon: SportsIcon },
-    {name: 'Cursos', link: '/history', icon: CourseIcon },
-    {name: 'Podcasts', link: '/history', icon: PodcastIcon },
+    {name: 'Em alta', link: '/to-do', icon: EmAltaIcon },
+    {name: 'Shopping', link: '/to-do', icon: ShoppingIcon },
+    {name: 'Música', link: '/to-do', icon: MusicIcon },
+    {name: 'Filmes', link: '/to-do', icon: MoviesIcon },
+    {name: 'Ao vivo', link: '/to-do', icon: LiveIcon },
+    {name: 'Jogos', link: '/to-do', icon: GamesIcon },
+    {name: 'Notícias', link: '/to-do', icon: NewsIcon },
+    {name: 'Esportes', link: '/to-do', icon: SportsIcon },
+    {name: 'Cursos', link: '/to-do', icon: CourseIcon },
+    {name: 'Podcasts', link: '/to-do', icon: PodcastIcon },
 ];
 
 export const items4 = [
-    {name: 'Configurações', link: '/history', icon: SettingsIcon },
-    {name: 'Denúncias', link: '/history', icon: ReportIcon },
-    {name: 'Ajuda', link: '/history', icon: HelpIcon },
-    {name: 'Enviar feedback', link: '/history', icon: FeedbackIcon },
+    {name: 'Configurações', link: '/to-do', icon: SettingsIcon },
+    {name: 'Denúncias', link: '/to-do', icon: ReportIcon },
+    {name: 'Ajuda', link: '/to-do', icon: HelpIcon },
+    {name: 'Enviar feedback', link: '/to-do', icon: FeedbackIcon },
 ];

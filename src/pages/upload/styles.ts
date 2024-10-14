@@ -6,8 +6,9 @@ export const Container = styled.div`
     background-color: white;
     display: flex;
     justify-content: center;
-
-`;
+    align-items: center;
+    
+    `;
 
 export const UploadContainer = styled.div`
     height: 300px;
@@ -17,7 +18,8 @@ export const UploadContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-   align-items : center;
+    align-items : center;
+    margin-bottom: 400px;
 
    input {
     width: 300px;

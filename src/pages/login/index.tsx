@@ -6,6 +6,7 @@ import { Container, LoginContainer } from "./styles";
 
 function Login(){
     const{ handleLogin } = useContext(UserContext)
+    // eslint-disable-next-line
     const [ dropdownOpen, setDropdownOpen] = useState(false);
 
     const [email, setEmail] = useState('')
@@ -18,6 +19,7 @@ function Login(){
         navigate('/')
     }
 
+    
     return (
         <Container>
             <LoginContainer>

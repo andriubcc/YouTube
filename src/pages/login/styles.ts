@@ -8,6 +8,7 @@ export const Container = styled.div`
     align-items: center;
     width: 100%;
     row-gap: 40px;
+    height: 80vh;
 `;
 
 

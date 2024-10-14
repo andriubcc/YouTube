@@ -5,16 +5,12 @@ import {
  } from "./styles";
  import { items1, items2, items3, items4 } from "./items"
 import { useNavigate } from "react-router-dom";
+import { useMenuContext } from "../../contexts/usercontext";
 
 
- 
 
- 
- interface IProps {
-    openMenu: boolean;
- }
-
-function Menu({ openMenu }: IProps) {
+function Menu() {
+    const { openMenu } = useMenuContext();
     const navigate = useNavigate();
 
 
@@ -28,8 +24,8 @@ function Menu({ openMenu }: IProps) {
 ))}
     <div className="divider"></div>
      <Span openMenu={openMenu}><span>Você</span></Span>
-                {items2.map((item) => (
-                <MenuItem openMenu={openMenu} onClick={() => navigate(item.link)}>
+                {items2.map((item, index) => (
+                <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(item.link)}>
                 <ButtonIcon alt="" src={item.icon}/>
                 <span>{item.name}</span>
                 </MenuItem>

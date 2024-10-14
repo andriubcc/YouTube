@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { Container} from "./styles"
 import { useNavigate } from "react-router-dom";
 
+interface DropDownProps {
+    isOpen: boolean;
+  }
 
-
-function Dropdown () {
+function Dropdown ({isOpen}: DropDownProps) {
     const { logOut, getVideos } = useContext(UserContext);
 
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ function Dropdown () {
     ]
     
     return (
-        <Container>
+        <Container isOpen={isOpen}>
             {buttons.map((buttons) => (
                 <div onClick={buttons.onClick}>{buttons.label}</div>
             ))}   

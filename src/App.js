@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { UserContext } from "./contexts/usercontext";
+import { MenuProvider } from "./contexts/usercontext";
 import { UserStorage } from "./context/userContext";
 import Header from "./components/header";
 import Menu from './components/menu/index'
@@ -12,42 +11,43 @@ import Upload from "./pages/upload";
 import MyVideos from "./pages/myvideos";
 import Search from "./pages/search";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import ToDo from "./pages/to-do";
+import { SearchProvider } from "./contexts/searchContext";
 
 function App() {
-    
-  const {openMenu, setOpenMenu } = useContext(UserContext);
 
   return (
-    <UserStorage>
     <BrowserRouter>
+    <SearchProvider>
+    <MenuProvider>
+    <UserStorage>
     <div className="App">
-     <Header openMenu={openMenu} setOpenMenu={setOpenMenu}/>
+     <Header />
      <div style={{ width: '100%', display: 'flex' }}>
-      <Menu openMenu={openMenu}/>
+      <Menu />
       <div style={{ width: '100%', padding: '50px 70px', boxSizing: 'border-box' }}>
           <Routes>
-            <Route path="/" element={<Home openMenu={openMenu} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/library" element={<Library />} />
             <Route path="/history" element={<History />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/myvideos" element={<MyVideos />}/>
-            <Route path="/search" element={<Search openMenu={openMenu} />}/> 
+            <Route path="/search" element={<Search />}/> 
+            <Route path="/to-do" element={<ToDo />}/>
           </Routes>
       </div>
      </div>
     </div>
-    </BrowserRouter>
     </UserStorage>
+    </MenuProvider>
+    </SearchProvider>
+    </BrowserRouter>
   );
 }
 
 
-// Deixar a tela de login no padrão (deixar bonita) - da pra melhorar mas ja ta bom
-// Implementar um dropdown menu no botao de login - feito, mas nao estilizei
-// Criar a tela e a integraçao para cadastro de usuario - feito
-// Criar a tela e a integraçao para cadastro de video; numero de visualizacoes; a quanto tempo esse video foi criado(data de quando ele foi criado = calculo de quanto tempo)
-// Implementaçao de pesquisa
+// AIzaSyAqlxcE55FbYQsWX41C8_5W82OpWUhkipM 
 
 export default App;

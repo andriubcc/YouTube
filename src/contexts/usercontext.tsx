@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, } from "react";
+import { ReactNode, createContext, useState, useContext } from "react";
 
 interface IProps {
     children: ReactNode
@@ -6,14 +6,16 @@ interface IProps {
 
 
 
-export const UserContext = createContext({} as any);
+const MenuContext = createContext({} as any);
 
-export const UserStore:React.FC<IProps> = ({ children }) => {
+export const useMenuContext = () => useContext(MenuContext);
+
+export const MenuProvider:React.FC<IProps> = ({ children }) => {
     const [openMenu, setOpenMenu] = useState(true)
 
     return (
-        <UserContext.Provider value={{openMenu, setOpenMenu}}>
+        <MenuContext.Provider value={{openMenu, setOpenMenu}}>
            {children}
-        </UserContext.Provider>
+        </MenuContext.Provider>
     )
 }
