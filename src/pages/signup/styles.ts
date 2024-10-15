@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const SignUpContainer = styled.div`
-    height: 550px;
+    height: 630px;
     width: 450px;
     background-color: white;
     border-radius: 5px;
@@ -50,4 +50,20 @@ export const SignUpContainer = styled.div`
         color: white;
         background-color: blue;
     }
+`;
+
+export const CheckBoxContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  input {
+    margin-top: 0px;
+    margin-left: 100px;
+  };
+
+  .cross {
+    margin-right: 150px;
+    min-width: 130px;
+  }
 `;

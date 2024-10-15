@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 
 export const LoginContainer = styled.div`
-    height: 350px;
+    height: 380px;
     width: 450px;
     background-color: white;
     border-radius: 5px;
@@ -52,4 +52,21 @@ export const LoginContainer = styled.div`
         color: white;
         background-color: blue;
     }
+`;
+
+export const CheckBoxContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+
+  input {
+    margin-top: 0px;
+    margin-left: 100px;
+  };
+
+  .cross {
+    margin-right: 150px;
+    min-width: 130px;
+  }
 `;

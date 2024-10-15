@@ -1,16 +1,22 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { Container, SignUpContainer } from "./styles";
+import { CheckBoxContainer, Container, SignUpContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 
 
 function SignUp(){
-    const{ handleSubmit } = useContext(UserContext)
+    const { handleSubmit } = useContext(UserContext)
     const navigate = useNavigate()
     
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+    }
     
    
     return (
@@ -27,8 +33,12 @@ function SignUp(){
                 </div>
                 <div className="cadastro">
                     <span>Crie uma senha</span>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type={showPassword? 'text' : 'password'}  value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
+                <CheckBoxContainer>
+          <input type="checkbox" id="show-password" checked={showPassword} onChange={handleShowPassword} />
+          <label htmlFor="show-password" className="cross">Mostrar senha</label>
+        </CheckBoxContainer>
                 <button onClick={() => {handleSubmit(name, email, password, navigate)}}>Cadastrar</button>
                 <span>Ja possui cadastro?</span>
                 <button onClick={() => {navigate('/login')}}>Fazer Login</button>

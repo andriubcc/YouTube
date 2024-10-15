@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
-import { Container, LoginContainer } from "./styles";
+import { CheckBoxContainer, Container, LoginContainer } from "./styles";
 
 
 function Login(){
@@ -19,6 +19,11 @@ function Login(){
         navigate('/')
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+    }
     
     return (
         <Container>
@@ -30,9 +35,13 @@ function Login(){
                 </div>
                 <div className="login">
                     <span>Senha</span>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type={showPassword? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button onClick={() => {closeDropdown();handleLogin(email, password)}}>Login</button>
+                <CheckBoxContainer>
+          <input type="checkbox" id="show-password" checked={showPassword} onChange={handleShowPassword} />
+          <label htmlFor="show-password" className="cross">Mostrar senha</label>
+        </CheckBoxContainer>
+                <button onClick={() => {closeDropdown();handleLogin(email, password)}}>Fazer Login</button>
             </LoginContainer>
         </Container>
         

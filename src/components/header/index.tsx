@@ -38,7 +38,6 @@ import Dropdown from "../dropdown";
   
     const { openMenu, setOpenMenu } = useMenuContext();
      
-    console.log(openMenu)
     const [clearButton, setClearButton] = useState(false)
   
     const [openSearch, setOpenSearch] = useState(false)
@@ -200,7 +199,6 @@ import Dropdown from "../dropdown";
             </LoginButton>
           </LoginContainer>
         }
-  
   
       </Container>
     )
